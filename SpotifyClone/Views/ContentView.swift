@@ -9,31 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var timing: Double = 0.0
+    @State private var timing: Double = 23.0
     
     @State private var songs: [Song] = Song.all
     
     @State private var selection: Song = Song.all[0]
     @State private var index: Int = 0
-
+    
+    
+    let songViewModel = SongViewModel()
     var body: some View {
         ZStack {
-            Color.primary
             
-            
-            Image(selection.imageName)
-                .resizable()
-                .blur(radius: 15)
-                .opacity(0.7)
-                .background(.thinMaterial)
-            
+//            Color.primary
+//            Image(selection.imageName)
+//                .resizable()
+//                .blur(radius: 15)
+//                .opacity(0.7)
+//                .background(.thinMaterial)
+            if selection.imageName == "theDoors" {
+                LinearGradient(colors: [Color("Doors2"), Color("Doors")], startPoint: .topLeading, endPoint: .trailing)
+            }else if selection.imageName == "willieNelson" {
+                LinearGradient(colors: [.gray, .brown], startPoint: .topTrailing, endPoint: .bottomTrailing)
+            } else if selection.imageName == "theRazorEdge" {
+                LinearGradient(colors: [.indigo, .purple], startPoint: .top, endPoint: .bottomTrailing)
+            }
+
             VStack {
+                Spacer()
+                Spacer()
+                
                 HStack {
-                    Button {
-                        print("More")
-                    } label: {
-                        Image(systemName: "chevron.down")
-                    }
+                    TopButtonView(actionPrint: "Action", image: "chevron.down")
+                        .foregroundColor(.white)
                     
                     Spacer()
                     
@@ -41,13 +49,10 @@ struct ContentView: View {
                         .foregroundStyle(.white)
                     
                     Spacer()
-
-                    Button {
-                        print("More")
-                    } label: {
-                        Image(systemName: "ellipsis")
-                    }
-
+                    
+                    TopButtonView(actionPrint: "More", image: "ellipsis")
+                        .foregroundColor(.white)
+                    
                 }.padding()
                 
                 Spacer()
@@ -63,16 +68,14 @@ struct ContentView: View {
                     }
                     
                 }.tabViewStyle(.page(indexDisplayMode: .never))
-                    
                 
                 HStack {
                     VStack(alignment: .leading) {
                         Text(selection.title)
-                            .font(.title2)
-                            .bold()
-                            .foregroundStyle(.primary)
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
                         Text(selection.artist)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(.regularMaterial)
                     }
                     
                     Spacer()
@@ -84,40 +87,44 @@ struct ContentView: View {
                             .font(.title)
                             .foregroundStyle(.green)
                     }
-                    
-                    
                 }.padding()
                 
                 
                 Slider(value: $timing, in: 0...180) {
                     Text("Slider")
+                    
                 } minimumValueLabel: {
                     Text("0:00")
                 } maximumValueLabel: {
                     Text("3:00")
-                }.tint(.primary)
-                .padding()
-                
+                }.tint(.white)
+                    .foregroundColor(.white)
+                    .padding()
                 
                 HStack {
                     Button {
-                        print("Shuffle")
+                        songViewModel.shufflePlaylist()
                     } label: {
                         Image(systemName: "shuffle")
                             .font(.title)
                     }
+                    .foregroundStyle(.white)
                     
                     Spacer()
                     
                     Button {
                         withAnimation {
                             let index = self.index < 1 ? 0 : (self.index - 1)
+
                             selection = Song.all[index]
                         }
+//                        songViewModel.nextSong()
                     } label: {
                         Image(systemName: "backward.end.fill")
                             .font(.system(size: 40))
-                    }.foregroundStyle(.primary)
+                    }
+                    .foregroundStyle(.white)
+
                     
                     Spacer()
                     
@@ -126,23 +133,27 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "play.circle.fill")
                             .font(.system(size: 90))
-                    }.foregroundStyle(.primary)
+                    }
+                    .foregroundStyle(.white)
 
+                    
                     
                     Spacer()
                     
                     Button {
                         withAnimation {
                             let index = self.index > Song.all.count - 1 ? Song.all.count - 1 : self.index + 1
-                            
+                            songViewModel.nextSong()
                             selection = Song.all[index]
-
                         }
+//                        songViewModel.pastSong()
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .font(.system(size: 40))
-                    }.foregroundStyle(.primary)
+                    }
+                    .foregroundStyle(.white)
 
+                    
                     Spacer()
                     
                     Button {
@@ -150,17 +161,24 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "repeat")
                             .font(.title)
-
                     }
-                }.padding()
+                    .foregroundStyle(.white)
 
+                }
+                .padding(.bottom, 50)
+                .padding(.horizontal)
+                
                 Spacer()
+                Spacer()
+            
                 
             }
+            
         }.ignoresSafeArea()
             .onChange(of: selection) { newValue in
                 print(newValue)
             }
+        
     }
 }
 
@@ -169,3 +187,24 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+struct TopButtonView: View {
+    var actionPrint: String
+    var image: String
+    
+    var body: some View {
+        Button {
+            print(actionPrint)
+        } label: {
+            Image(systemName: image)
+        }
+    }
+}
+
+
+// song view communique avec songVM
+
+// Song vm Selection morceau courrant, playlist, func pause play stop, shuffle, repeat
+
+// ask to VM songviewmodel @State sur songVM et SongVm il donnera les infos à la vue
