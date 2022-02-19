@@ -13,7 +13,6 @@
 		30CB850D27BA8E2B00E47115 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30CB850C27BA8E2B00E47115 /* Preview Assets.xcassets */; };
 		30CB851727BA8FE900E47115 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB851627BA8FE900E47115 /* Song.swift */; };
 		30CB851927BA907600E47115 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB851827BA907600E47115 /* Playlist.swift */; };
-		3C877EB627BAAF33002A23C5 /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C877EB527BAAF33002A23C5 /* SongViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +23,6 @@
 		30CB850C27BA8E2B00E47115 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		30CB851627BA8FE900E47115 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		30CB851827BA907600E47115 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
-		3C877EB527BAAF33002A23C5 /* SongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +93,6 @@
 		30CB851527BA8F1700E47115 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3C877EB527BAAF33002A23C5 /* SongViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -174,7 +171,6 @@
 				30CB850827BA8E2A00E47115 /* ContentView.swift in Sources */,
 				30CB850627BA8E2A00E47115 /* SpotifyCloneApp.swift in Sources */,
 				30CB851927BA907600E47115 /* Playlist.swift in Sources */,
-				3C877EB627BAAF33002A23C5 /* SongViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

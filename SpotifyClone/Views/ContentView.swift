@@ -16,25 +16,16 @@ struct ContentView: View {
     @State private var selection: Song = Song.all[0]
     @State private var index: Int = 0
     
-    
-    let songViewModel = SongViewModel()
     var body: some View {
         ZStack {
             
-//            Color.primary
-//            Image(selection.imageName)
-//                .resizable()
-//                .blur(radius: 15)
-//                .opacity(0.7)
-//                .background(.thinMaterial)
-            if selection.imageName == "theDoors" {
-                LinearGradient(colors: [Color("Doors2"), Color("Doors")], startPoint: .topLeading, endPoint: .trailing)
-            }else if selection.imageName == "willieNelson" {
-                LinearGradient(colors: [.gray, .brown], startPoint: .topTrailing, endPoint: .bottomTrailing)
-            } else if selection.imageName == "theRazorEdge" {
-                LinearGradient(colors: [.indigo, .purple], startPoint: .top, endPoint: .bottomTrailing)
-            }
-
+            Color.primary
+            Image(selection.imageName)
+                .resizable()
+                .blur(radius: 15)
+                .opacity(0.7)
+                .background(.thinMaterial)
+        
             VStack {
                 Spacer()
                 Spacer()
@@ -103,7 +94,7 @@ struct ContentView: View {
                 
                 HStack {
                     Button {
-                        songViewModel.shufflePlaylist()
+                        print("Shuffle")
                     } label: {
                         Image(systemName: "shuffle")
                             .font(.title)
@@ -118,7 +109,6 @@ struct ContentView: View {
 
                             selection = Song.all[index]
                         }
-//                        songViewModel.nextSong()
                     } label: {
                         Image(systemName: "backward.end.fill")
                             .font(.system(size: 40))
@@ -143,10 +133,8 @@ struct ContentView: View {
                     Button {
                         withAnimation {
                             let index = self.index > Song.all.count - 1 ? Song.all.count - 1 : self.index + 1
-                            songViewModel.nextSong()
                             selection = Song.all[index]
                         }
-//                        songViewModel.pastSong()
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .font(.system(size: 40))
