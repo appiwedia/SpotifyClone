@@ -14,7 +14,6 @@ struct Song: Identifiable, Hashable {
     let title: String
     let artist: String
     let time: Int
-    
 }
 
 extension Song {
